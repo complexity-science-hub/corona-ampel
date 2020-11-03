@@ -359,7 +359,7 @@ function onjsonloaded() {
         if (WORLD) {
             loadCSVData("assets/population_countries.csv?t="+now, onTableLoaded, ",");
         } else {
-            loadCSVData("doc_info_point/district_data.csv?t="+now, onTableLoaded, ",");
+            loadCSVData("data/district_data.csv?t="+now, onTableLoaded, ",");
         }
 
         // createdistricttable(district_map)
