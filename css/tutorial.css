@@ -1,0 +1,141 @@
+
+.info {
+    position: absolute;
+    max-width: 370px;
+    min-height: 100px;
+    border: 3px solid #236192;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    background: white; /* visibility: hidden;opacity: 0;*/
+    cursor: default;
+    visibility: hidden;
+    font-size: 12pt;
+    border-radius: 3px;
+    margin: 10px;
+    z-index: 1000;
+}
+
+.tutorial {
+    position: absolute;
+    max-width: 300px;
+    min-height: 50px;
+    border: 3px solid #236192;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    background: white; /* visibility: hidden;opacity: 0;*/
+    cursor: default;
+    visibility: hidden;
+    font-size: 10pt;
+    border-radius: 3px;
+    z-index: 1000;
+}
+
+.tutorial_title {
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: normal;
+    line-height: normal;
+    background: #236192;
+    font-weight: bold;
+    color: white;
+}
+
+.tutorial_msg {
+    padding: 10px;
+    font-weight: normal;
+    line-height: normal;
+    text-align: justify;
+}
+
+
+.tutorial_bar {
+    background: #236192;
+    color: white;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    height: 10px;
+}
+
+
+.tutorial_close {
+    color: white;
+    position: relative;
+    top: -17px;
+    right: 0px;
+
+    text-align: right;
+    font-weight: bold;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+}
+
+.button {
+    background-color: #236192;
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 150px;
+    /*padding: 15px 32px;
+    margin: 4px 2px;
+    font-size: 16px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 9pt;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.hand:hover {
+    cursor: pointer;
+}
+
+.tutstatus {
+      height: 10px;
+      width: 0%;
+      color: white;
+      background: #236192;
+      right: 0px;
+      position: relative;
+}
+
+.tutstatusbutton {
+    background-color: #236192;
+    border: none;
+    color: white;
+    width: 10%;
+    /*padding: 15px 32px;
+    margin: 4px 2px;
+    font-size: 16px;*/
+    cursor: pointer;
+    height:20px;
+
+}
+
+.buttonbckg {
+
+    color:white;
+    background-color:#f1f1f1!important;
+    padding: 5px;
+    width: 60px;
+    border: none;
+    /*padding: 15px 32px;
+    margin: 4px 2px;
+    font-size: 16px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 9pt;
+    cursor: pointer;
+}
+
+
+.buttons {
+    align:center;
+}

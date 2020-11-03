@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta charset="UTF-8">
+    <title data-translation="pageTitle"></title>
+
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="libs/papaparse.min.js"></script>
+    <script type="text/javascript" src="libs/chroma.min.js"></script>
+    <script type="text/javascript" src="libs/moment.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script type="text/javascript" src="libs/regression.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/translations.js"></script>
+
+
+    <script type="text/javascript" src="js/mathutils.js?ver=1.15"></script>
+    <script src='js/datahandler.js?ver=1.114'></script>
+    <script src='js/data.js?ver=1.13'></script>
+    <script src='js/map_ops.js?ver=1.13'></script>
+    <script type="text/javascript" src="libs/materialize.min.js?ver=1.111"></script>
+    <script src='js/widgets.js?ver=1.112'></script>
+    <script src='js/cookies.js?ver=1.114'></script>
+    <!-- <script src='minified.js?v=1'></script> -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+    <link href="css/app_styles.css?ver=1.4" rel="stylesheet"/>
+
+    <style type="text/css">
+        .credits {
+            position: absolute;
+            bottom: 0px;
+            font-family: Arial;
+            right: 0px;
+            z-index: 99;
+            background-color: lightgrey;
+            font-size: 7pt;
+            padding: 4px;
+        }
+    </style>
+
+    <script>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/tutorial.css?ver=1.111"/>
+</head>
+
+<body>
+
+<div id="title">
+    <div id="title_content">
+        <div class="title-top">
+            <span class="title-and-logo">
+               <a href="https://www.csh.ac.at"><img class="logo" src="assets/CSH_Logo.png" alt="csh_logo"></a>
+                <span class="title-text title-large-screen" data-translation="pageTitle"></span>
+            </span>
+
+            <div id="amp_radio" class="absrel_radio">
+                <label class="tooltipped" id="radioamp_tool" data-position="bottom" data-tooltip="momentanes Risiko">
+                    <input class="with-gap" type="radio" id="radio_amp" name="amp_radio" value="radio_amp">
+                    <span>Ampel</span>
+                </label>
+                <label class="tooltipped" id="trend_tool" data-position="bottom" data-tooltip="momentaner Trend">
+                    <input class="with-gap" type="radio" id="radio_trend" name="amp_radio" value="radio_trend">
+                    <span>Trend</span>
+                </label>
+            </div>
+
+            <!-- Mobile title version -->
+            <div class="title-and-logo title-mobile-screen">
+                <p class="title-text-mobile">
+                    <span data-translation="pageTitle"></span>
+                </p>
+            </div>
+
+            <span id="timelineSlider-container"></span>
+            <div class="lang">
+                <a id="lang-de" href="index.html?lang=de">DE</a> | <a id="lang-en" href="index.html?lang=en">EN</a>
+            </div>
+            <img class="disc tooltipped" data-tooltip="Disclaimer" src="assets/qmark.svg" alt="disclaimer" onclick="showDisclaimer()">
+
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="one">
+        <div id="map">
+            <div class="tooltipped" id="color_legend" data-position="bottom" data-tooltip=""></div>
+        </div>
+
+        <div id="info-overlay">
+            <a id="info-overlay-close" class="close-btn" href="#">X</a>
+            <div></div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Cookie Banner -->
+<div id="cookie-modal" class="modal bottom-sheet open" tabindex="0" style="z-index: 1003; display: none; opacity: 1; bottom: 0px;">
+    <div class="modal-footer">This website uses cookies to provide our services. More information can be found in our 
+        <a href="https://www.csh.ac.at/data-protection/">Privacy Policy</a>.
+        <a href="#!" onclick="saveCookieAccept()" class="modal-close waves-effect waves-green btn-flat">Accept Cookies</a>
+        <a href="#!" onclick="saveCookieDecline()" class="modal-close waves-effect waves-green btn-flat">Decline Cookies</a>
+    </div>
+</div>
+
+<div id="disclaimer-modal" class="modal">
+    <div class="modal-content">
+        <h5 id="modal-title" data-translation="disclaimerAustriaTitle"></h5>
+        <p id="modal-text" data-translation="disclaimerAustriaContent">
+    </div>
+    <div class="modal-footer">
+                <span class="switch" >
+            <label  style="color: black;font-size: 15px;">
+                Toggle Colorblind Mode
+                <input type="checkbox" onclick="handleColorBlindModeChange(event)">
+                <span class="lever"></span>
+            </label>
+        </span>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+</div>
+
+<div id="disclaimer-modal-global" class="modal">
+    <div class="modal-content">
+        <h5 class="modal-title" data-translation="disclaimerGlobalTitle"></h5>
+        <p class="modal-text" data-translation="disclaimerGlobalContent">
+    </div>
+    <div class="modal-footer">
+        <span class="switch" >
+            <label  style="color: black;font-size: 15px;">
+                Toggle Colorblind Mode
+                <input type="checkbox" onclick="handleColorBlindModeChange(event)">
+                <span class="lever"></span>
+            </label>
+        </span>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+</div>
+
+<script>
+    document.body.style['pointer-events'] = 'none'; //prevent user events while page is initializing
+
+    window.onload = function() {
+        showCookieBanner();
+        // toggleColorBlind(COLORBLIND);
+        initTranslations();
+        showInfoBox(setupWelcomeMsg());
+        resizeWindow();
+    };
+
+    //window.addEventListener("resize", resizeWindow);
+
+    mapboxgl.accessToken = 'your_token_here';
+    var map;
+
+    if (WORLD) {
+        map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [5.0,30],
+            zoom: 2
+        });
+    } else {
+        map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [13.3,47.7],
+            zoom: 6.5
+        });
+    }
+
+    map.on('load', function() {
+        if (WORLD) {
+            loadCSVData("assets/population_countries.csv?t="+now, onTableLoaded, ",");
+        } else {
+            loadData("assets/bezirke_complete_2020.geojson?t=" + now, onjsonloaded);
+        }
+    });
+
+</script>
+
+</body>
+</html>
